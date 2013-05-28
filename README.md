@@ -7,7 +7,11 @@ I don't know how to build this offhand, but thought others might have some usefu
 
 ## Parsing
 
+I had breifly considered using `R` for parsing the RSS feeds, but there does not appear to be an RSS parsing library for `R`. The `python` library [`feedparser`](https://code.google.com/p/feedparser/) looks like a good bet for its ability to handle rss and atom.
+
 `Ruby` or `Python` (preferably `Python`) parsing of a list of RSS feeds, the output of which is subsequently stored in a database (`sqlite` maybe??). This step is meant to be done on a personal machine.
+
+
 
 ## Output
 
