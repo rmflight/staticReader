@@ -16,3 +16,7 @@ The results of the parsing of the feeds are then written to a single (or set of)
 ### Interactivity
 
 The interactive display of the feeds is enabled by `javascript`, with a level of display for the feeds and individual items, as well as moving between items, marking as **favorites**, marking everything as read, etc. These functions, being `javascript`, actually modify the html pages themselves, changing attributes. These attributes can subsequently be read by functions on the personal machine when updated.
+
+### Ideas for processing
+
+Could I use a gist as a storage location for which posts have been read?? i.e. something that could be modified by javascript on the page I'm using. Is it possible to easily modify a provided **anonymous** gist using `javascript`?? Would be interesting to try, at least for keeping track of stuff that has been read, and starred for later. This would not have to keep track of everything, just be modified in between updates.
