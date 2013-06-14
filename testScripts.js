@@ -53,8 +53,9 @@ xhr.send();
 xhr.responseText
 
 // Make a request to our test gist
-var urlGist = "https://api.github.com/gists/5736064"
-var xhr = createCORSRequest('GET', urlGist)
+var urlGist = "https://api.github.com/users/rmflight/gists?";
+var useGist = urlGist + accessToken;
+var xhr = createCORSRequest('GET', useGist)
 xhr.send()
 xhr.responseText
 
