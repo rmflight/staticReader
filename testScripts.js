@@ -61,25 +61,16 @@ xhr.send()
 xhr.response
 
 // make a patch request to the server
+var currDate = "todays date is:" + Date();
+var contentString = "This is a test file that I'm working \nwith to see if I can modify it\nafter getting a personal OAuth token\n" + currDate;
 var newData = {
+  "description": "still a test gist",
   "files": {
-    "test1.txt": {
-      "content": "this is some simple text\nthat I want to read using javascript\nNew stuff!"
+    "file1.txt": {
+      "content": contentString
     }
   }
 };
 
-var xhr = createCORSRequest('PATCH', urlGist)
-xhr.send(newData)
-
-var request = new XMLHttpRequest();
-request.open('GET', url, true);
-request.onreadystatechange = function() {if (request.readyState==4) alert("It worked!");};
-request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-request.send();
-
-
-var patch = new XMLHttpRequest();
-request.open('PATCH', url, true);
-request.setRequestHeader("Content-length", newData.length);
-request.setRequestHeader("Connection", "close");
+var xhr = createCORSRequest('PATCH', useGist)
+xhr.send(JSON.stringify(newData))
