@@ -45,19 +45,20 @@ function makeCorsRequest() {
   xhr.send();
 }
 
-var url = "https://api.github.com/gists/public";
-
-var xhr = createCORSRequest('GET', url)
-xhr.send();
-
-xhr.responseText
-
-// Make a request to our test gist
+// Make a request for the user
+// Make sure to do var accessToken = 'access_token=access_token from github'
 var urlGist = "https://api.github.com/users/rmflight/gists?";
 var useGist = urlGist + accessToken;
 var xhr = createCORSRequest('GET', useGist)
 xhr.send()
 xhr.responseText
+
+// Request info on a particular gist
+var urlGist = "https://api.github.com/gists/5737151?"
+var useGist = urlGist + accessToken;
+var xhr = createCORSRequest('GET', useGist)
+xhr.send()
+xhr.response
 
 // make a patch request to the server
 var newData = {
