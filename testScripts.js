@@ -64,3 +64,10 @@ function getAccessToken() {
 
 var gistID = "5737151";
 var gitAPI = "https://api.github.com/gists/"
+
+function incrementGist() {
+	if (accessToken.length == 0) {
+		accessToken = getAccessToken();
+	}
+	accessToken
+}
