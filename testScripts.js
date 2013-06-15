@@ -55,32 +55,12 @@ function genStr(oldContent, currCount) {
 	return(oldContent + newStr)
 }
 
-var accessToken = "access_token=" + prompt("Please supply your GitHub token");
+var accessToken = "";
+
+function getAccessToken() {
+	accessToken = "access_token=" + prompt("Please supply your GitHub token");
+	return(accessToken)
+}
 
 var gistID = "5737151";
 var gitAPI = "https://api.github.com/gists/"
-
-// Request info on a particular gist
-//var urlGist = "https://api.github.com/gists/5737151?"
-var useGist = gitAPI + gistID + "?" + accessToken;
-var xhr = createCORSRequest('GET', useGist)
-xhr.send()
-var oldData = JSON.parse(xhr.response)
-
-var file1Contents = oldData['files']['file1.txt']['content'];
-var triggerCount = 0;
-
-// make a patch request to the server
-triggerCount = incCounter(triggerCount)
-var newContent = genStr(file1Contents, triggerCount)
-var newData = {
-  "description": "still a test gist",
-  "files": {
-    "file1.txt": {
-      "content": newContent
-    }
-  }
-}
-
-var xhr = createCORSRequest('PATCH', useGist)
-xhr.send(JSON.stringify(newData))
