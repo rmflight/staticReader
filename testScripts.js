@@ -45,32 +45,42 @@ function makeCorsRequest() {
   xhr.send();
 }
 
-// Make a request for the user
-// Make sure to do var accessToken = 'access_token=access_token from github'
-var urlGist = "https://api.github.com/users/rmflight/gists?";
-var useGist = urlGist + accessToken;
-var xhr = createCORSRequest('GET', useGist)
-xhr.send()
-xhr.responseText
+function incCounter(currCount) {
+	var newCount = currCount + 1;
+	return newCount;
+}
+
+function genStr(oldContent, currCount) {
+	var newStr = "count: " + currCount + "; date: " + Date() + "\n";
+	return(oldContent + newStr)
+}
+
+var accessToken = "access_token=" + prompt("Please supply your GitHub token");
+
+var gistID = "5737151";
+var gitAPI = "https://api.github.com/gists/"
 
 // Request info on a particular gist
-var urlGist = "https://api.github.com/gists/5737151?"
-var useGist = urlGist + accessToken;
+//var urlGist = "https://api.github.com/gists/5737151?"
+var useGist = gitAPI + gistID + "?" + accessToken;
 var xhr = createCORSRequest('GET', useGist)
 xhr.send()
-xhr.response
+var oldData = JSON.parse(xhr.response)
+
+var file1Contents = oldData['files']['file1.txt']['content'];
+var triggerCount = 0;
 
 // make a patch request to the server
-var currDate = "todays date is:" + Date();
-var contentString = "This is a test file that I'm working \nwith to see if I can modify it\nafter getting a personal OAuth token\n" + currDate;
+triggerCount = incCounter(triggerCount)
+var newContent = genStr(file1Contents, triggerCount)
 var newData = {
   "description": "still a test gist",
   "files": {
     "file1.txt": {
-      "content": contentString
+      "content": newContent
     }
   }
-};
+}
 
 var xhr = createCORSRequest('PATCH', useGist)
 xhr.send(JSON.stringify(newData))
