@@ -64,10 +64,38 @@ function getAccessToken() {
 
 var gistID = "5737151";
 var gitAPI = "https://api.github.com/gists/"
+var gistQuery = "";
+var gistData = "";
 
-function incrementGist() {
+function checkToken() {
 	if (accessToken.length == 0) {
 		accessToken = getAccessToken();
+		gistQuery = gitAPI + gistID + "?" + accessToken;
 	}
-	accessToken
+}
+
+function checkData() {
+	if (gistData.length == 0) {
+		gistData = createCORSRequest('GET', gistQuery);
+		gistData.send()
+	}
+}
+
+function incrementGist() {
+	checkToken();
+	checkData();
+	
+	var tmpData = JSON.parse(gistData.responseText);
+	var tmpContents = tmpData['files']['file1.txt']['content'];
+	var newContents = tmpContents + Date() + "\n";
+	var newData = {
+					"files": {
+						"file1.txt": {
+							"content": newContents
+										}
+						}
+					};
+	
+	gistData = createCORSRequest('PATCH', gistQuery)
+	gistData.send(JSON.stringify(newData))
 }
