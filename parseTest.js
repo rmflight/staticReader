@@ -72,7 +72,7 @@ function getAccessToken() {
 function incrementGist() {
 	gistData = createCORSRequest('GET', gistQuery);
 	gistData.send();
-	tmpJSON = JSON.parse(gistData.responseText.trim());
+	tmpJSON = JSON.parse(gistData.response);
 }
 
 
