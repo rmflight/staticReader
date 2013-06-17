@@ -71,8 +71,15 @@ function getAccessToken() {
 
 function incrementGist() {
 	gistData = createCORSRequest('GET', gistQuery);
+	gistData.onreadystatechange = function() {
+		if (gistData.readyState === 4) {
+			if (gistData.status === 200) {
+				tmpJSON = JSON.parse(gistData.response);
+			}
+		}
+	}
 	gistData.send();
-	tmpJSON = JSON.parse(gistData.response);
 }
+
 
 

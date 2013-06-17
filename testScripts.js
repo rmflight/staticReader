@@ -12,6 +12,7 @@ function createCORSRequest(method, url) {
     // CORS not supported.
     xhr = null;
   }
+  
   return xhr;
 }
 
@@ -77,15 +78,22 @@ function checkToken() {
 function checkData() {
 	if (gistData.length == 0) {
 		gistData = createCORSRequest('GET', gistQuery);
-		gistData.send()
+		gistData.onreadystatechange = function() {
+			if (gistData.readyState === 4) {
+				if (gistData.status === 200) {
+					tmpJSON = JSON.parse(gistData.response);
+				}
+			}
+		}
 	}
+	gistData.send()
 }
+
 
 function incrementGist() {
 	checkToken();
 	checkData();
 	
-	var tmpData = JSON.parse(gistData.responseText);
 	var tmpContents = tmpData['files']['file1.txt']['content'];
 	var newContents = tmpContents + Date() + "\n";
 	var newData = {
@@ -97,5 +105,13 @@ function incrementGist() {
 					};
 	
 	gistData = createCORSRequest('PATCH', gistQuery)
-	gistData.send(JSON.stringify(newData))
+			gistData.onreadystatechange = function() {
+			if (gistData.readyState === 4) {
+				if (gistData.status === 200) {
+					tmpJSON = JSON.parse(gistData.response);
+				}
+			}
+		}
+	
+	gistData.send()
 }
