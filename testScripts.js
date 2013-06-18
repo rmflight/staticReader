@@ -1,6 +1,14 @@
 // Create the XHR object.
 function createCORSRequest(method, url) {
   var xhr = new XMLHttpRequest();
+  xhr.onreadystatechange = function() {
+	if (xhr.readyState === 4) {
+		if (xhr.status === 200) {
+			tmpJSON = JSON.parse(xhr.response);
+			console.log("changed data")
+		}
+	}
+  }
   if ("withCredentials" in xhr) {
     // XHR for Chrome/Firefox/Opera/Safari.
     xhr.open(method, url, true);
@@ -68,33 +76,24 @@ var gitAPI = "https://api.github.com/gists/"
 var gistQuery = "";
 var gistData = "";
 
-function checkToken() {
+function askToken() {
 	if (accessToken.length == 0) {
 		accessToken = getAccessToken();
 		gistQuery = gitAPI + gistID + "?" + accessToken;
 	}
 }
 
-function checkData() {
+function getInitial() {
 	if (gistData.length == 0) {
 		gistData = createCORSRequest('GET', gistQuery);
-		gistData.onreadystatechange = function() {
-			if (gistData.readyState === 4) {
-				if (gistData.status === 200) {
-					tmpJSON = JSON.parse(gistData.response);
-				}
-			}
-		}
 	}
 	gistData.send()
 }
 
 
-function incrementGist() {
-	checkToken();
-	checkData();
-	
-	var tmpContents = tmpData['files']['file1.txt']['content'];
+function sendPatch() {
+		
+	var tmpContents = tmpJSON['files']['file1.txt']['content'];
 	var newContents = tmpContents + Date() + "\n";
 	var newData = {
 					"files": {
@@ -105,13 +104,5 @@ function incrementGist() {
 					};
 	
 	gistData = createCORSRequest('PATCH', gistQuery)
-			gistData.onreadystatechange = function() {
-			if (gistData.readyState === 4) {
-				if (gistData.status === 200) {
-					tmpJSON = JSON.parse(gistData.response);
-				}
-			}
-		}
-	
-	gistData.send()
+	gistData.send(newData);
 }
