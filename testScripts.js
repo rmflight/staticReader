@@ -104,5 +104,5 @@ function sendPatch() {
 					};
 	
 	gistData = createCORSRequest('PATCH', gistQuery)
-	gistData.send(newData);
+	gistData.send(JSON.stringify(newData));
 }
