@@ -1,4 +1,4 @@
-{"feeds":
+{"Bioinformatics":
   [
-  {"Ivory Basement":"http://ivory.idyll.org/blog/feeds/all.atom.xml"},
-  {"Byte Size Biology":"http://bytesizebio.net/feed/"}]}
+  {"name":"Ivory Basement", "url":"http://ivory.idyll.org/blog/feeds/all.atom.xml"},
+  {"name":"Byte Size Biology", "url":"http://bytesizebio.net/feed/"}]}
