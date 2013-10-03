@@ -82,8 +82,8 @@ function checkData() {
 }
 
 function incrementGist() {
-	checkToken();
-	checkData();
+	checkToken()
+	checkData()
 	
 	var tmpData = JSON.parse(gistData.responseText);
 	var tmpContents = tmpData['files']['file1.txt']['content'];
