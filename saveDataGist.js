@@ -71,10 +71,11 @@ function getAccessToken() {
 	return(accessToken)
 }
 
-var gistID = "5737151";
+var gistID = "6825393";
 var gitAPI = "https://api.github.com/gists/"
 var gistQuery = "";
 var gistData = "";
+var patchContent = "";
 
 function askToken() {
 	if (accessToken.length == 0) {
@@ -90,21 +91,22 @@ function getInitial() {
 	gistData.send()
 }
 
-<<<<<<< HEAD
-
-function sendPatch() {
+function sendPatch(patchContent) {
 		
-	var tmpContents = tmpJSON['files']['file1.txt']['content'];
-	var newContents = tmpContents + Date() + "\n";
+	{
+		patchContent = typeof patchContent !== 'undefined' ? patchContent : Date();
+	}
+	
+	var tmpContents = tmpJSON['files']['savedURL.md']['content'];
+	var newContents = "\n" + tmpContents + patchContent + "\n\n";
 	var newData = {
 					"files": {
-						"file1.txt": {
+						"savedURL.md" : {
 							"content": newContents
 										}
 						}
 					};
 	
 	gistData = createCORSRequest('PATCH', gistQuery)
-	gistData.send(JSON.stringify(newData))
+	gistData.send(JSON.stringify(newData));
 }
-
