@@ -19,6 +19,11 @@ alert(alertStr);
 <div id="header">
 <h1>rawdog</h1>
 </div>
+<div id="buttons">
+<p><input type="button" value="token" OnClick="askToken()"></p>
+<p><input type="button" value="initial" OnClick="getInitial()"></p>
+<p><input type="button" value="patch" OnClick="sendPatch()"></p>
+</div>
 <div id="items">
 __items__
 </div>
