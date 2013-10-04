@@ -90,10 +90,19 @@ function getInitial() {
 	gistData.send()
 }
 
+<<<<<<< HEAD
 
 function sendPatch() {
 		
 	var tmpContents = tmpJSON['files']['file1.txt']['content'];
+=======
+function incrementGist() {
+	checkToken()
+	checkData()
+	
+	var tmpData = JSON.parse(gistData.responseText);
+	var tmpContents = tmpData['files']['file1.txt']['content'];
+>>>>>>> 6f7a81b03b87674611de3c05c192a5480916c18a
 	var newContents = tmpContents + Date() + "\n";
 	var newData = {
 					"files": {
@@ -104,5 +113,10 @@ function sendPatch() {
 					};
 	
 	gistData = createCORSRequest('PATCH', gistQuery)
+<<<<<<< HEAD
 	gistData.send(JSON.stringify(newData));
 }
+=======
+	gistData.send(JSON.stringify(newData))
+}
+>>>>>>> 6f7a81b03b87674611de3c05c192a5480916c18a
