@@ -64,6 +64,14 @@ function genStr(oldContent, currCount) {
 	return(oldContent + newStr)
 }
 
+// bunch of global variables used for querying the gist. They are global because they are shared amongst the functions.
+
+var gistID = "6825393"; // Should be modified to where you want your gist to be stored
+var gitAPI = "https://api.github.com/gists/"
+var gistQuery = "";
+var gistData = "";
+var patchContent;
+
 // functions for setting the githug access token as a cookie, and loading it when the page loads
 var accessToken = "";
 
@@ -76,6 +84,7 @@ function submitToken() {
   document.cookie = "staticReader" + "=" + token + expires + ";";
   document.getElementById('tokenButton').style.color = "green";
   accessToken = token;
+  gistQuery = gitAPI + gistID + "?" + accessToken;
 }
   
 function loadToken() {
@@ -88,15 +97,12 @@ function loadToken() {
     accessToken = t_value.substr(t_start, t_end);
     document.getElementById('tokenButton').style.color = "green";
     document.getElementById('tokenField').value = accessToken;
+    gistQuery = gitAPI + gistID + "?" + accessToken;
   }
 }
 
 
-var gistID = "6825393";
-var gitAPI = "https://api.github.com/gists/"
-var gistQuery = "";
-var gistData = "";
-var patchContent = "";
+
 
 function askToken() {
 	if (accessToken.length == 0) {
