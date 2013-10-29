@@ -101,16 +101,6 @@ function loadToken() {
   }
 }
 
-
-
-
-function askToken() {
-	if (accessToken.length == 0) {
-		accessToken = getAccessToken();
-		gistQuery = gitAPI + gistID + "?" + accessToken;
-	}
-}
-
 function getInitial() {
 	if (gistData.length == 0) {
 		gistData = createCORSRequest('GET', gistQuery);
