@@ -87,7 +87,7 @@ datetimeformat %Y-%m-%d %H:%M
 # You can define additional strings using "define" in this config file; for
 # example, if you say "define myname Adam Sampson", then "__myname__" will be
 # replaced by "Adam Sampson" in the output.
-pagetemplate rmflightPage
+pagetemplate staticPage
 
 # Similarly, the template used for each item shown. Use "rawdog -s item" to
 # show the template currently in use as a starting-point for customisation.
@@ -116,7 +116,7 @@ pagetemplate rmflightPage
 # only be included if __items__ would expand to something other than
 # the empty string. Ifs can be nested, and __else__ is supported.
 # (This also works for the other templates, but it's most useful here.)
-itemtemplate rmflightItem
+itemtemplate staticItem
 
 # The template used to generate the feed list (__feeds__ above). Use "rawdog
 # -s feedlist" to show the current template.

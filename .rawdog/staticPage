@@ -6,14 +6,9 @@
     <meta name="robots" content="noindex,nofollow,noarchive">
 __refresh__
     <link rel="stylesheet" href="style.css" type="text/css">
-    <script>
-function displayAlert(alertStr)
-{
-alert(alertStr);
-}
-</script>
+    
 <script src="saveDataGist.js"></script>
-    <title>rmflight feeds</title>
+    <title>static feeds</title>
 </head>
 <body id="rawdog">
 <div id="header">
