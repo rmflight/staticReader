@@ -1,10 +1,11 @@
 // Create the XHR object.
-function createCORSRequest(method, url) {
+function createCORSRequest(method, url, buttonID) {
   var xhr = new XMLHttpRequest();
   xhr.onreadystatechange = function() {
 	if (xhr.readyState === 4) {
 		if (xhr.status === 200) {
-			tmpJSON = JSON.parse(xhr.response);
+			gistContents = JSON.parse(xhr.response);
+      colorGreen(buttonID);
 			console.log("changed data")
 		}
 	}
@@ -71,10 +72,14 @@ var gitAPI = "https://api.github.com/gists/"
 var gistQuery = "";
 var gistData = "";
 var patchContent;
+var gistContents;
 
 // functions for setting the githug access token as a cookie, and loading it when the page loads
 var accessToken = "";
 
+/*
+Lets the user provide their github api oauth token to be stored as a cookie, and also refresh it. The token is stored for 2 weeks.
+*/
 function submitToken() {
   var token = document.getElementById('tokenField').value;
   var nDay = 14;
@@ -82,11 +87,14 @@ function submitToken() {
   date.setTime(date.getTime() + (nDay * 24 * 60 * 60 * 1000))
   var expires = "; expires=" + date.toGMTString();
   document.cookie = "staticReader" + "=" + token + expires + ";";
-  document.getElementById('tokenButton').style.color = "green";
+  colorGreen('tokenButton');
   accessToken = "access_token=" + token;
   gistQuery = gitAPI + gistID + "?" + accessToken;
 }
   
+/* 
+Loads the github token previously stored as a cookie, if it is available
+*/
 function loadToken() {
   var tokenCookie = "staticReader";
   var t_value = document.cookie;
@@ -95,27 +103,43 @@ function loadToken() {
     t_start = t_value.indexOf("=") + 1;
     t_end = t_value.length;
     accessToken = "access_token=" + t_value.substr(t_start, t_end);
-    document.getElementById('tokenButton').style.color = "green";
+    colorGreen('tokenButton');
     document.getElementById('tokenField').value = accessToken;
     gistQuery = gitAPI + gistID + "?" + accessToken;
+    
   }
 }
 
 function getInitial(buttonID) {
   console.log(buttonID)
 	if (gistData.length == 0) {
-		gistData = createCORSRequest('GET', gistQuery);
+		gistData = createCORSRequest('GET', gistQuery, buttonID);
 	}
+  colorRed(buttonID)
 	gistData.send()
 }
 
-function sendPatch(patchContent) {
+function colorRed(buttonID) {
+  document.getElementById(buttonID).style.backgroundColor = "#FF3300"
+}
+
+function colorGreen(buttonID) {
+  document.getElementById(buttonID).style.backgroundColor = "#99FF66"
+}
+
+
+/* Takes the content (normally a single URL) and the button doing the submitting,
+   and submits a patch request to the gist. If there is no content (undefined), then
+   the current date is sent. The buttonID is used to change the color of the button
+   while the patch request is operational. After updating, the data is stored in 'tmpJSON'
+*/
+function sendPatch(patchContent, buttonID) {
 		
 	{
 		patchContent = typeof patchContent !== 'undefined' ? patchContent : Date();
 	}
 	
-	var tmpContents = tmpJSON['files']['savedURL.md']['content'];
+	var tmpContents = gistContents['files']['savedURL.md']['content'];
 	var newContents = "\n" + tmpContents + patchContent + "\n\n";
 	var newData = {
 					"files": {
@@ -125,6 +149,8 @@ function sendPatch(patchContent) {
 						}
 					};
 	
-	gistData = createCORSRequest('PATCH', gistQuery)
+	gistData = createCORSRequest('PATCH', gistQuery, buttonID);
+  colorRed(buttonID);
 	gistData.send(JSON.stringify(newData));
+  
 }

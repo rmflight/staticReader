@@ -5,8 +5,16 @@
 </HEAD>
 <BODY>
 <P>This is where you will enter all the text and images you want displayed in a browser window.</P>
-<p><input type="button" value="token" OnClick="askToken()"></p>
-<p><input type="button" value="initial" OnClick="getInitial()"></p>
-<p><input type="button" value="patch" OnClick="sendPatch()"></p>
+<p><form id="token">
+    GitHub Token: <input type="password" id="tokenField" autocomplete="on">
+    <input type="button" id="tokenButton" onclick="submitToken()" value="Submit">
+    <script>
+      colorRed('tokenButton');
+      loadToken();
+    </script>
+    
+  </form></p>
+<p><input id="initialButton" type="button" value="initial" OnClick="getInitial(this.id)"></p>
+<p><input id="patchButton" type="button" value="patch" OnClick="sendPatch(undefined, this.id)"></p>
 </BODY>
 </HTML>
