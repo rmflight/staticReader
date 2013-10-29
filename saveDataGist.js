@@ -112,11 +112,12 @@ function loadToken() {
 
 function getInitial(buttonID) {
   console.log(buttonID)
-	if (gistData.length == 0) {
+	if ((gistData.length == 0) && (accessToken.length != 0)) {
 		gistData = createCORSRequest('GET', gistQuery, buttonID);
+    colorRed(buttonID);
+    gistData.send();
 	}
-  colorRed(buttonID)
-	gistData.send()
+  
 }
 
 function colorRed(buttonID) {
@@ -139,18 +140,20 @@ function sendPatch(patchContent, buttonID) {
 		patchContent = typeof patchContent !== 'undefined' ? patchContent : Date();
 	}
 	
-	var tmpContents = gistContents['files']['savedURL.md']['content'];
-	var newContents = "\n" + tmpContents + patchContent + "\n\n";
-	var newData = {
-					"files": {
-						"savedURL.md" : {
-							"content": newContents
-										}
-						}
-					};
-	
-	gistData = createCORSRequest('PATCH', gistQuery, buttonID);
-  colorRed(buttonID);
-	gistData.send(JSON.stringify(newData));
+  if (gistContents !== 'undefined') {
   
+  	var tmpContents = gistContents['files']['savedURL.md']['content'];
+  	var newContents = "\n" + tmpContents + patchContent + "\n\n";
+  	var newData = {
+  					"files": {
+  						"savedURL.md" : {
+  							"content": newContents
+  										}
+  						}
+  					};
+  	
+  	gistData = createCORSRequest('PATCH', gistQuery, buttonID);
+    colorRed(buttonID);
+  	gistData.send(JSON.stringify(newData));
+  }
 }

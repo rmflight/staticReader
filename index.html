@@ -8,13 +8,15 @@
 <p><form id="token">
     GitHub Token: <input type="password" id="tokenField" autocomplete="on">
     <input type="button" id="tokenButton" onclick="submitToken()" value="Submit">
-    <script>
-      colorRed('tokenButton');
-      loadToken();
-    </script>
+    
     
   </form></p>
 <p><input id="initialButton" type="button" value="initial" OnClick="getInitial(this.id)"></p>
 <p><input id="patchButton" type="button" value="patch" OnClick="sendPatch(undefined, this.id)"></p>
+<script>
+      colorRed('tokenButton');
+      loadToken();
+      getInitial('initialButton');
+    </script>
 </BODY>
 </HTML>
