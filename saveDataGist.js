@@ -101,7 +101,8 @@ function loadToken() {
   }
 }
 
-function getInitial() {
+function getInitial(buttonID) {
+  console.log(buttonID)
 	if (gistData.length == 0) {
 		gistData = createCORSRequest('GET', gistQuery);
 	}
