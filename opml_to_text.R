@@ -26,7 +26,7 @@ for (iNode in seq(1, xmlSize(opmlUse))){
 }
 
 feedList <- sapply(outXML, function(x){
-  paste(x["text"], "24h", x["xmlUrl"], sep=" ")
+  paste("feed", "24h", x["xmlUrl"], sep=" ")
 })
 
 cat(feedList, sep="\n", file="feedList.txt")
