@@ -20,9 +20,13 @@ alert(alertStr);
 <h1>rawdog</h1>
 </div>
 <div id="buttons">
-<p><input type="button" value="token" OnClick="askToken()"></p>
-<p><input type="button" value="initial" OnClick="getInitial()"></p>
-<p><input type="button" value="patch" OnClick="sendPatch()"></p>
+<p><form id="token">
+    GitHub Token: <input type="password" id="tokenField" autocomplete="on">
+    <input type="button" id="tokenButton" onclick="submitToken()" value="Submit">
+    
+    
+  </form></p>
+<p><input id="initialButton" type="button" value="Fetch Gist Data" OnClick="getInitial(this.id)"></p>
 </div>
 <div id="items">
 __items__
@@ -37,5 +41,10 @@ __feeds__
 version __version__
 by <a href="mailto:ats@offog.org">Adam Sampson</a>.</p>
 </div>
+<script>
+      colorRed('tokenButton');
+      loadToken();
+      getInitial('initialButton');
+    </script>
 </body>
 </html>
