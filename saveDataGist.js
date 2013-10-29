@@ -64,12 +64,33 @@ function genStr(oldContent, currCount) {
 	return(oldContent + newStr)
 }
 
+// functions for setting the githug access token as a cookie, and loading it when the page loads
 var accessToken = "";
 
-function getAccessToken() {
-	accessToken = "access_token=" + prompt("Please supply your GitHub token");
-	return(accessToken)
+function submitToken() {
+  var token = document.getElementById('tokenField').value;
+  var nDay = 14;
+  var date = new Date();
+  date.setTime(date.getTime() + (nDay * 24 * 60 * 60 * 1000))
+  var expires = "; expires=" + date.toGMTString();
+  document.cookie = "staticReader" + "=" + token + expires + ";";
+  document.getElementById('tokenButton').style.color = "green";
+  accessToken = token;
 }
+  
+function loadToken() {
+  var tokenCookie = "staticReader";
+  var t_value = document.cookie;
+  var t_start = t_value.indexOf(tokenCookie + "=");
+  if (t_start != -1){
+    t_start = t_value.indexOf("=") + 1;
+    t_end = t_value.length;
+    accessToken = t_value.substr(t_start, t_end);
+    document.getElementById('tokenButton').style.color = "green";
+    document.getElementById('tokenField').value = accessToken;
+  }
+}
+
 
 var gistID = "6825393";
 var gitAPI = "https://api.github.com/gists/"
