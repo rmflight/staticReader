@@ -83,7 +83,7 @@ function submitToken() {
   var expires = "; expires=" + date.toGMTString();
   document.cookie = "staticReader" + "=" + token + expires + ";";
   document.getElementById('tokenButton').style.color = "green";
-  accessToken = token;
+  accessToken = "access_token=" + token;
   gistQuery = gitAPI + gistID + "?" + accessToken;
 }
   
@@ -94,7 +94,7 @@ function loadToken() {
   if (t_start != -1){
     t_start = t_value.indexOf("=") + 1;
     t_end = t_value.length;
-    accessToken = t_value.substr(t_start, t_end);
+    accessToken = "access_token=" + t_value.substr(t_start, t_end);
     document.getElementById('tokenButton').style.color = "green";
     document.getElementById('tokenField').value = accessToken;
     gistQuery = gitAPI + gistID + "?" + accessToken;
