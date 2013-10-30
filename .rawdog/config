@@ -210,7 +210,7 @@ tidyhtml true
 # displaying several feeds and want new articles to appear in the right
 # chronological place). If this is false, then articles will first be
 # sorted by the time that rawdog first saw them.
-sortbyfeeddate true
+sortbyfeeddate false # changed for working with since-last plugin
 
 # Whether to consider articles' unique IDs or GUIDs when updating rawdog's
 # database. If you turn this off, then rawdog will create a new article in its
