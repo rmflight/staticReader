@@ -4,7 +4,6 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
     <meta name="robots" content="noindex,nofollow,noarchive">
-__refresh__
     <link rel="stylesheet" href="style.css" type="text/css">
     
 <script src="saveDataGist.js"></script>
@@ -12,7 +11,7 @@ __refresh__
 </head>
 <body id="rawdog">
 <div id="header">
-<h1>rawdog</h1>
+<h1>Feeds</h1>
 </div>
 <div id="buttons">
 <p><form id="token">
