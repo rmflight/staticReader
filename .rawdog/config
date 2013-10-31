@@ -280,6 +280,5 @@ changeconfig true
 #	define_myclass broken
 #feed 3h http://proxyfeed.example.com/proxied.rss http_proxy=http://localhost:1234/
 #feed 3h http://dupsfeed.example.com/duplicated.rss allowduplicates=true
-feed 24h http://www.biodatamining.org/latest/rss
-feed 24h http://genome.cshlp.org/rss/current.xml
+feed 5m http://www.reddit.com/new/.rss
 
