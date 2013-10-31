@@ -20,13 +20,17 @@ Create a *gist*, and insert at least one file, with a line of text, and a return
 
 With this information in hand, you need to modify the `saveDataGist.js` file. Specifically, you need to modify the variable `gistID` on line **70**, and if you are using a different file name in the *gist*, then also modify lines **144** and **149**.
 
+You also need to define the file where the `rawdog` output should go, line **151** in `.rawdog/config`.
+
 If you were previously using Google Reader, and have your feeds stored in an OPML file, you can also use the `opml_to_text.R` function to extract your feed URLs into a format suitable for `rawdog`. 
 
 ## Testing
 
 To verify that everything is working properly, you should now run `rawdog` once. The included `config` file has the *reddit* rss feed for *new* included to allow for testing.
 
-
+```
+rawdog -d pathtodir/.rawdog -uw
+```
 Given my simple needs for an RSS reader (not a power user, but like to read a bunch of different stuff), and my preference for having feeds available that I can read from any device (main machine, mobile, etc), I would like to build something simple that others might find useful.
 
 ## Requirements
