@@ -1,0 +1,11 @@
+Package: staticreader
+Version: 0.0.1
+Title: Managing a static RSS reader
+Author: Robert M Flight <rflight79@gmail.com>
+Maintainer: Robert M Flight <rflight79@gmail.com>
+Depends: R
+Imports: github, XML
+Description: Create and manage a staticly hosted RSS reader
+License: CC0
+URL: https://github.com/rmflight/staticReader
+BugReports: https://github.com/rmflight/staticReader/issues
