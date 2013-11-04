@@ -1,6 +1,6 @@
 # staticReader
 
-`StaticReader` is essentially a couple of templates for the `rawdog` *rss* reader that make it possible to **easily** save rss item links somewhere else when hosting the feed on static hosting such as **github**. The templates, combined with some `rawdog` plugins, **github** hosting and *gists* and javascript cross-site requests let us do some interesting things.
+`StaticReader` is an `R` package that provides a static RSS reader using the `python` RSS reader `rawdog`, some saving functionality using `javascript` and github `gists`, and other github manipulation using the `github` `R` package. This makes it it possible to **easily** save rss item links somewhere else when hosting the feed on static hosting such as **github**. The templates, combined with some `rawdog` plugins, **github** hosting and *gists* and javascript cross-site requests let us do some interesting things.
 
 ## Requirements
 
